@@ -1,0 +1,57 @@
+{% extends "teamwon_mas/base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+{% block app_content %}
+<h2> <font color="Red">Project Proposal</font></h2>
+<hr>
+
+<style>
+   body {background-color: powderblue;}
+</style>
+<h2><u><font color="blue">Mobility as a Service</font></u></h2>
+
+<h5><b><font color="black">Team Won</font></b></h5>
+<p><b>514 Project Proposal by</b></p>
+
+<p><b>Matthew Bayles, Nathan Lant, Izzat Mukattash</b></p>
+<h5><u><font color="red">Introduction</font></u></h5>
+<p>Mobility as a service vehicles (Uber and Lyft) are often used to get from point A to point B. The future of transportation holds potential to be cheaper and faster, especially with autonomous vehicles. Uber is currently an effective form of mobility, but it is expensive. Public transportation is not the immediate solution because it can often be inconvenient or inaccessible. Now, if one decides to take an Uber, it is much more expensive than the public transportation. In a perfect world, Lyft and Uber could work together with UTA to make public transportation accessible to everyone. The problem is that it still is too expensive.
+
+
+The majority of the cost of an Uber is to pay the driver, so when you take out the driver, an Uber gets a lot cheaper. How cheap? Is it still worth it to keep your car? What if there was such thing as a free ride? Suppose in an autonomous vehicle (a self driving Uber) local stores or food joints could pay for your ride. It would be a system of live advertizing. Suppose Taco Bell is willing to pay for your Uber ride, but you have to go through the Taco Bell drive-through. So your ride is now 15 minutes slower, but it’s free (you don’t have to buy anything from Taco Bell). So, transportation is now a decision of cost vs time. Am I willing to pay more money to get there faster, or take a free, but more roundabout ride?
+
+    Last mile transit is the term used to describe mobility from your last mode of public transportation to your destination (and first mile being from your origin to your first mode of transportation). Ubers, being free, could greatly strengthen the UTA transit system.</p>
+
+<h5><u><font color="red">Motivation</font></u></h5>
+<p>The motivation behind Mobility as a Service application comes from attending ITE Conference in Salt Lake City. It was there that UTA brought up the idea of joining forces with Uber and Lyft to create an efficient and more user friendly transportation system, that would serve the community of Utah County. As it stands, transportation system in Utah County is not efficient nor is it a preferred way to get from point A to B. Therefore, Utah Transit Authority is looking for ways to make transportation systems in Utah the preferred way of commuting. In order to achieve such goal, it is very important to incorporate other modes of transportation that are provided by other companies such as Uber and Lyft. From there the idea of joining forces with Uber and Lyft came to fruition.
+
+    The application platform will provide alternate routes and options to choose from that will allow you to priorities whether time, or cost are most important. Currently there is not an application that will provide the consumer with transportation routes that uses both UTA facilities and other companies, therefore Mobility as a Service will be a very useful application that can provide service to consumer and help UTA achieve an ultimate goal of creating a more effective transportation system.</p>
+
+<h5><u><font color="red">Proposed Workflow and Project Details</font></u></h5>
+<p>In order to facilitate a joint workflow between Uber and UTA a web GIS application will be designed and built by Brigham Young University using the Tethys Platform. This application will provide the means to connect residents of Utah County with services provided by UTA and Uber in a cheap and efficient way. The following sections outlines the proposed application and its associated functions and data.
+
+This application will provide a map interface for choosing the best transportation means to navigate between two locations in Utah County. The user will be presented with at least two options that involve Uber and UTA services for transportation with the estimated travel time and cost. In addition, links to appropriate UTA and Uber services will be provided for the user for each travel option. The user will be able to modify the presented options based upon on variety of inputs described later in this proposal. In addition several GIS data sources will be required for this project. The following data will be required for vector and raster analysis: a shapefile containing all roads within Utah County, point locations of commercial establishments willing to provide discounts if travel route includes a stop at their establishment, bus stop locations, train station locations, bus and train routes.
+
+The application will allow the user to place two points anywhere within Utah County on a map. These points represent a starting and ending location. In addition to point placement the user will be presented with a variety of controls and options for refining their search. These options include specifying whether cost or time is more important, whether the user would like to include a stop to a commercial establishment for a reduced fair but increased travel time. In addition to these options the user can also specify advanced options such as manually entering cost per mile for the various travel mediums and speed limits for roads.
+
+Once the user has specified the necessary inputs several gis analyses will be performed using the user data and associated GIS data stored in the application. A least cost path analysis will be executed incorporating all of the required data. The geoprocessing workflow will be as follows: all data will be read into the process and the appropriate rasters will be generated for input into the least cost path analysis data tool provided by the geoprocess. This process will then return the two or three best options for the user to reach their destination using a map service to display the routes and possible stops on the main map. In addition, the estimated time and estimated cost of the trip will be calculated using data obtained from UTA and Uber or user defined values and displayed as well.
+
+The application will be hosted by BYU at a custom Tethys Portal. All code for this project will be hosted on a GitHub account created especially for this project. This separate account will facilitate future work by new students by avoiding having the code on a personal account. This code will be developed under the MIT license.
+
+    Matthew Bayles will manage the front-end of the application. Nathan Lant will manage the back-end portion of the application. Izzat Mukattash will manage the geoprocessing and map services. All group members will contribute to each portion of the project and will report to the designated lead. Each project lead will be responsible for assigning work in their section to the other members and assigning deadlines.</p>
+
+
+<h5><u><font color="red">Conclusion</font></u></h5>
+<p>With automated vehicles, Uber will become cheaper and UTA will become more accessible. Commercial entities will be able to receive more business as they sponsor rides around the community. This engineering solution is sustainable as it will enhance the environmental, social, and economic factors around the community. This application will provide and present data in an easy way for the user to maximize time or money in deciding on modes of transportation to get from point A to point B.</p>
+
+</hr>
+
+
+
+
+{% endblock %}
