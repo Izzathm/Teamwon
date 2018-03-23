@@ -1,4 +1,4 @@
-{% extends "izzatmapapp/base.html" %}
+{% extends "teamwon_mas/base.html" %}
 {% load tethys_gizmos %}
 
 {% block app_content %}
@@ -8,13 +8,13 @@
     <h2><u> <font color="Red">Project Mock-up Diagrams</font></u></h2>
     <hr>
 
-<img src="{% static 'izzatmapapp/images/intro1.png' %}"></td>
+<img src="{% static 'teamwon_mas/images/intro1.png' %}"></td>
 
     <p> This will be the main interaction page for the user. At the top we see two options, Cheap/Fast. The user will choose whichever option is more important and based on the selection,the app will automatically select one of the transportation modes provided under “Transportation Modes”. The user will also have the option to do it manually and select from the modes without prioritizing based on price and time. The user will then select a starting location and an end location, once the user press “Get Routes” the app will provide different transportation options depending on the parameters selected above.
 
 For further and more advanced options the user can press “Advanced Options” tap and will be directed to a new window described in details below. </p>
 
-    <img src="{% static 'izzatmapapp/images/intro3.png' %}">
+    <img src="{% static 'teamwon_mas/images/intro3.png' %}">
     <p>This is the advanced options tab. On this page the user will add more specific information (based on data available) to find even more accurate and situationally specific results. The first three input options are to generate local Uber and Lyft fares and to measure an average speed limit in the city. The output will be more accurate using these inputs.
 
  The next drop down option allows the user to choose a preference on where their ride will “stop by” as a sponsored ride. Options include fast food, retail stores, gas stations, and other businesses willing to subsidize rides to earn more public attraction. The output is a calculation showing how much that specific establishment will be willing to subsidize the ride.
