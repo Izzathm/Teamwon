@@ -78,3 +78,10 @@ def proposal(request):
     }
 
     return render(request, 'teamwon_mas/proposal.html', context)
+
+def diagrams(request):
+    context = {
+
+    }
+
+    return render(request, 'teamwon_mas/diagrams.html', context)

@@ -8,7 +8,7 @@ class TeamwonMas(TethysAppBase):
 
     name = 'Mobility As a Service'
     index = 'teamwon_mas:home'
-    icon = 'izzatmapapp/images/icon.gif'
+    icon = 'teamwon_mas/images/icon2.gif'
     package = 'teamwon_mas'
     root_url = 'teamwon-mas'
     color = '#1D63C5'
@@ -35,6 +35,12 @@ class TeamwonMas(TethysAppBase):
                 url='teamwon-mas/proposal',
                 controller='teamwon_mas.controllers.proposal'
             ),
+            UrlMap(
+                name='diagrams',
+                url='teamwon_mas/diagrams',
+                controller='teamwon_mas.controllers.diagrams'
+            ),
         )
+
 
         return url_maps
