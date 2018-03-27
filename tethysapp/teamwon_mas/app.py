@@ -12,7 +12,7 @@ class TeamwonMas(TethysAppBase):
     package = 'teamwon_mas'
     root_url = 'teamwon-mas'
     color = '#1D63C5'
-    description = 'Teamwon final application'
+    description = "Get there faster, and while you're at it go for free."
     tags = ''
     enable_feedback = False
     feedback_emails = []
