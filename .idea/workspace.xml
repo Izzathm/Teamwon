@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24e10710-1083-4052-9cc7-aba8325d10a8" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/public/images/loader.gif" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/app.py" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/app.py" />
-      <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/controllers.py" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/controllers.py" />
       <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js" />
-      <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/base.html" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/base.html" />
+      <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/home.html" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/home.html" />
+      <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-270">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -64,8 +61,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+            <state relative-caret-position="162">
+              <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -74,8 +71,8 @@
       <file leaf-file-name="map_view.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="136" column="21" lean-forward="false" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
+            <state relative-caret-position="527">
+              <caret line="107" column="10" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
@@ -85,14 +82,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="buffer_service.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="buffer_service.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="221" column="0" lean-forward="true" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-              <folding>
-                <element signature="e#3750#5071#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="519">
+              <caret line="280" column="37" lean-forward="true" selection-start-line="280" selection-start-column="37" selection-end-line="280" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -117,6 +112,7 @@
         <option value="$PROJECT_DIR$/tethysapp/teamwon_mas/app.py" />
         <option value="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html" />
         <option value="$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js" />
+        <option value="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/home.html" />
       </list>
     </option>
   </component>
@@ -348,9 +344,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="196" column="39" lean-forward="true" selection-start-line="196" selection-start-column="39" selection-end-line="196" selection-end-column="39" />
-          <folding>
-            <element signature="e#3750#5071#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -460,10 +454,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/controllers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="92" column="44" lean-forward="false" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        <state relative-caret-position="162">
+          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -476,28 +480,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/controllers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="92" column="44" lean-forward="false" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="136" column="21" lean-forward="false" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
+        <state relative-caret-position="527">
+          <caret line="107" column="10" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
           <folding>
             <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
@@ -508,11 +494,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="221" column="0" lean-forward="true" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-          <folding>
-            <element signature="e#3750#5071#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="519">
+          <caret line="280" column="37" lean-forward="true" selection-start-line="280" selection-start-column="37" selection-end-line="280" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

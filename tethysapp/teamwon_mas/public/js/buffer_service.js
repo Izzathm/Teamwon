@@ -14,8 +14,10 @@ require([
   "esri/layers/FeatureLayer",
   "esri/symbols/SimpleLineSymbol",
   "dojo/ready",
+  "esri/views/2d/draw/Draw",
+  "dojo/on",
   "dojo/domReady!"
-], function(Map, GraphicsLayer, Graphic, Point, Geoprocessor, LinearUnit, FeatureSet, MapView, FeatureLayer,SimpleLineSymbol,ready ){
+], function(Map, GraphicsLayer, Graphic, Point, Geoprocessor, LinearUnit, FeatureSet, MapView, FeatureLayer,SimpleLineSymbol,ready,Draw,on ){
     //a map with basemap
     function init(){
         var map = new Map({
@@ -41,10 +43,10 @@ require([
     map.add(graphicsLayer);
 
     var view = new MapView({
-    container: "viewDiv",
-    map: map,
-	center: [-111.67266235351346, 40.24052798830994],
-	zoom: 10
+        container: "viewDiv",
+        map: map,
+        center: [-111.67266235351346, 40.24052798830994],
+        zoom: 10
     });
 
     view.whenLayerView(featureLayer).then(function(lyrView){
@@ -110,51 +112,97 @@ require([
         };
 
 	//add map click function
-    view.on("click", createPoint);
+    // view.on("click", createPoint);
     // view.on("click", clip_bus);
+    // function initToolbar() {
+    //   tb = new Draw(map);
+    //   tb.on("draw-end", addGraphic);
+    //
+    //   // event delegation so a click handler is not
+    //   // needed for each individual button
+    //   on(dom.byId("info"), "click", function(evt) {
+    //     if ( evt.target.id === "info" ) {
+    //       return;
+    //     }
+    //     var tool = evt.target.id.toLowerCase();
+    //     map.disableMapNavigation();
+    //     tb.activate(tool);
+    //   });
+    // }
 
 	//main function
-    function createPoint(event) {
-        console.log(event.mapPoint.longitude)
-        console.log(event.mapPoint.latitude)
-          graphicsLayer.removeAll();
-          var point = new Point({
-            longitude: event.mapPoint.longitude,
-            latitude: event.mapPoint.latitude
-          });
+    // function createPoint(event) {
+    function createPoint() {
+        view.graphics.removeAll();
+         graphicsLayer.removeAll();
+        var draw = new Draw({
+            view: view
+        });
+         // tb = new Draw(map);
+         var action = draw.create("point");
+            console.log(action)
+          // action.on("cursor-update", function (evt) {
+          //   console.log(evt.coordinates)
+          // });
+        // fires when a vertex is added
+        action.on("draw-complete", function (evt) {
+            console.log(evt)
+            // console.log(evt.mapPoint.longitude)
+            var point = new Point({
+                x: evt.coordinates[0],
+                y: evt.coordinates[1],
+                spatialReference: view.spatialReference
+            });
+            var inputGraphic = new Graphic({
+                geometry: point,
+                symbol: markerSymbol,
+                attributes:{'id':'input_point'}
+            });
+            console.log(view)
+             graphicsLayer.add(inputGraphic);
+             // view.graphics.add(inputGraphic);
+        })
 
-          var inputGraphic = new Graphic({
-            geometry: point,
-            symbol: markerSymbol,
-              attributes:{'id':'input_point'}
-          });
-
-          graphicsLayer.add(inputGraphic);
-            console.log(graphicsLayer)
-          var inputGraphicContainer = [];
-          inputGraphicContainer.push(inputGraphic);
-
-          console.log(inputGraphicContainer)
-          var featureSet = new FeatureSet();
-          featureSet.features = inputGraphicContainer;
-
-          var bfDistance = new LinearUnit();
-          bfDistance.distance = 100;
-          bfDistance.units = "miles";
-
-		  // input parameters
-          // var params = {
-           //  "Point": featureSet,
-           //  "Distance": bfDistance
-          // };
-
-          // var params = {
-          //   "Input_Features": featureSet,
-          //   "Distance": bfDistance
-          // };
-           var params = {
-            "Pour_Point": featureSet,
-          };
+        // console.log(event.mapPoint.longitude)
+        // console.log(event.mapPoint.latitude)
+        //   graphicsLayer.removeAll();
+        //   var point = new Point({
+        //     longitude: event.mapPoint.longitude,
+        //     latitude: event.mapPoint.latitude
+        //   });
+        //
+        //   var inputGraphic = new Graphic({
+        //     geometry: point,
+        //     symbol: markerSymbol,
+        //       attributes:{'id':'input_point'}
+        //   });
+        //
+        //   graphicsLayer.add(inputGraphic);
+        //     console.log(graphicsLayer)
+        //   var inputGraphicContainer = [];
+        //   inputGraphicContainer.push(inputGraphic);
+        //
+        //   console.log(inputGraphicContainer)
+        //   var featureSet = new FeatureSet();
+        //   featureSet.features = inputGraphicContainer;
+        //
+        //   var bfDistance = new LinearUnit();
+        //   bfDistance.distance = 100;
+        //   bfDistance.units = "miles";
+        //
+		 //  // input parameters
+        //   // var params = {
+        //    //  "Point": featureSet,
+        //    //  "Distance": bfDistance
+        //   // };
+        //
+        //   // var params = {
+        //   //   "Input_Features": featureSet,
+        //   //   "Distance": bfDistance
+        //   // };
+        //    var params = {
+        //     "Pour_Point": featureSet,
+        //   };
 
           // gp.submitJob(params).then(completeCallback, errBack, statusCallback);
     }
@@ -232,20 +280,28 @@ require([
 
 	function drawResultErrBack(err) {
         console.log("draw result error: ", err);
+        alert("The process failed")
+         $(".btn ").prop('disabled',false)
+        $("#loader_map").hide()
     }
 
 	function statusCallback(data) {
         console.log(data.jobStatus);
+
     }
 
     function errBack(err) {
         console.log("gp error: ", err);
+        alert("The process failed")
+         $(".btn ").prop('disabled',false)
+        $("#loader_map").hide()
     }
     function showLoading(){
         console.log("show loading")
     }
     app = {clip_bus: clip_bus,
-            bufferPoint:bufferPoint
+            bufferPoint:bufferPoint,
+        createPoint:createPoint
     };
 }
 
