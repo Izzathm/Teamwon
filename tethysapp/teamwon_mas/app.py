@@ -40,6 +40,11 @@ class TeamwonMas(TethysAppBase):
                 url='teamwon_mas/diagrams',
                 controller='teamwon_mas.controllers.diagrams'
             ),
+            UrlMap(
+                name='mapview',
+                url='teamwon_mas/mapview',
+                controller='teamwon_mas.controllers.mapview'
+            ),
         )
 
 

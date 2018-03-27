@@ -85,3 +85,9 @@ def diagrams(request):
     }
 
     return render(request, 'teamwon_mas/diagrams.html', context)
+def mapview(request):
+    context = {
+
+    }
+
+    return render(request, 'teamwon_mas/map_view.html', context)
