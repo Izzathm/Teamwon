@@ -103,14 +103,14 @@
     <label>Uber: Cost per mile</label>
     <div class="input-group input-group-sm">
         <!--<span class="input-group-addon" id="sizing-addon3">UBER cost per mile</span>-->
-        <input type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3">
+        <input id="uberCost"type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3" value="3">
         <span class="input-group-addon">$/mile</span>
     </div>
 
     <label>Average Speed</label>
     <div class="input-group input-group-sm">
         <!--<span class="input-group-addon" id="sizing-addon3">UBER cost per mile</span>-->
-        <input type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3">
+        <input id = "averSpeed" type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3" value="3">
         <span class="input-group-addon">mph</span>
     </div>
 
@@ -133,8 +133,8 @@
         Clip Bus Routes
     </button>
     <p></p>
-    <button id="get_routes_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="This function will generate a watershed from the selected point"onclick="app.bufferPoint()">
-        Get Watershed
+    <button id="get_routes_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="This function will generate a route to your destination"onclick="app.getRoutes()">
+        Get Routes
     </button>
 </div>
 <img id="loader" src="{% static 'teamwon_mas/images/loader.gif' %}" style="width:100px; display:none">

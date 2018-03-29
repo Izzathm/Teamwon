@@ -85,8 +85,6 @@ require([
           }
         };
 
-
-
     var symbolLine = {
       type: "simple-line",  // autocasts as new SimpleLineSymbol()
       color: [225, 51, 204],
@@ -206,7 +204,46 @@ require([
 
           // gp.submitJob(params).then(completeCallback, errBack, statusCallback);
     }
+    function getRoutes(){
+        console.log("getting route information")
+        var uber_chk = $("#uberChk").val();
+        var spon_chk = $("#redFareChk").val();
+        var bus_chk = $("#busesChk").val();
+        var walk_chk = $("#walkingChk").val();
 
+        var uber_cost = $("#uberCost").val();
+        var avg_speed = $("#averSpeed").val();
+        var rest_sel = $("#sel1").val();
+        var featureSet = new FeatureSet();
+
+        for (graphic in graphicsLayer.graphics.items){
+            console.log()
+            if (graphicsLayer.graphics.items[graphic].attributes.id == 'input_point'){
+                featureSet.features = [graphicsLayer.graphics.items[graphic]];
+            }
+        }
+
+        console.log(uber_chk);
+        console.log(spon_chk);
+        console.log(bus_chk);
+        console.log(walk_chk);
+        console.log(uber_cost);
+        console.log(avg_speed);
+        console.log(rest_sel);
+        console.log(featureSet);
+
+        var params = {
+            "placeholder": uber_chk,
+            "placeholder": spon_chk,
+            "placeholder": bus_chk,
+            "placeholder": walk_chk,
+            "placeholder": uber_cost,
+            "placeholder": avg_speed,
+            "placeholder": rest_sel,
+            "placeholder": featureSet,
+        };
+        // gp.submitJob(params).then(completeCallback, errBack, statusCallback);
+    }
     function bufferPoint(){
         $(".btn ").prop('disabled',true)
         $("#loader_map").show()
@@ -301,7 +338,8 @@ require([
     }
     app = {clip_bus: clip_bus,
             bufferPoint:bufferPoint,
-        createPoint:createPoint
+        createPoint:createPoint,
+        getRoutes:getRoutes
     };
 }
 
