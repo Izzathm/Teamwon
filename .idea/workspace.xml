@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24e10710-1083-4052-9cc7-aba8325d10a8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js" />
-      <change beforePath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html" afterPath="$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.26563507">
+    <splitter split-orientation="horizontal" split-proportion="0.41843972">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
@@ -72,7 +70,7 @@
           <file leaf-file-name="map_view.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/templates/teamwon_mas/map_view.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="347">
+                <state relative-caret-position="671">
                   <caret line="112" column="121" lean-forward="true" selection-start-line="112" selection-start-column="121" selection-end-line="112" selection-end-column="121" />
                   <folding>
                     <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
@@ -104,8 +102,8 @@
           <file leaf-file-name="buffer_service.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2099">
-                  <caret line="245" column="5" lean-forward="true" selection-start-line="245" selection-start-column="5" selection-end-line="245" selection-end-column="5" />
+                <state relative-caret-position="191">
+                  <caret line="211" column="54" lean-forward="false" selection-start-line="211" selection-start-column="54" selection-end-line="211" selection-end-column="54" />
                   <folding />
                 </state>
               </provider>
@@ -523,8 +521,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/teamwon_mas/public/js/buffer_service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2099">
-          <caret line="245" column="5" lean-forward="true" selection-start-line="245" selection-start-column="5" selection-end-line="245" selection-end-column="5" />
+        <state relative-caret-position="191">
+          <caret line="211" column="54" lean-forward="false" selection-start-line="211" selection-start-column="54" selection-end-line="211" selection-end-column="54" />
           <folding />
         </state>
       </provider>

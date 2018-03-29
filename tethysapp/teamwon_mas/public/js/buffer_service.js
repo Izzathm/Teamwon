@@ -206,10 +206,10 @@ require([
     }
     function getRoutes(){
         console.log("getting route information")
-        var uber_chk = $("#uberChk").val();
-        var spon_chk = $("#redFareChk").val();
-        var bus_chk = $("#busesChk").val();
-        var walk_chk = $("#walkingChk").val();
+        var uber_chk = $("#uberChk").is(':checked')
+        var spon_chk = $("#redFareChk").is(':checked')
+        var bus_chk = $("#busesChk").is(':checked')
+        var walk_chk = $("#walkingChk").is(':checked')
 
         var uber_cost = $("#uberCost").val();
         var avg_speed = $("#averSpeed").val();
