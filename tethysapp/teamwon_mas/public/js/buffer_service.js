@@ -30,11 +30,11 @@ require([
       width: "2px",
       style: "style_solid"
 	};
-    featureLayer = new FeatureLayer({
-            url: "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Utah_bus_stops/FeatureServer/",
-        });
-    featureLayer.symbol = symbolLine
-    map.layers.add(featureLayer);
+    // featureLayer = new FeatureLayer({
+    //         url: "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Utah_bus_stops/FeatureServer/",
+    //     });
+    // featureLayer.symbol = symbolLine
+    // map.layers.add(featureLayer);
 
     // leg_dem = document.getElementById("legend_dem")
 		// 	leg_rest = document.getElementById("legend_rest")
@@ -55,27 +55,38 @@ require([
         center: [-111.67266235351346, 40.24052798830994],
         zoom: 10
     });
+    $("#viewDiv").show()
+    $(".btn ").prop('disabled',false)
+    $("#loader_map").hide()
 
-    view.whenLayerView(featureLayer).then(function(lyrView){
-      lyrView.watch("updating", function(val){
-        if(!val){  // wait for the layer view to finish updating
-          lyrView.queryFeatures().then(function(results){
-            setTimeout(function(){
-                    console.log("done loading");
-                    $("#viewDiv").show()
-                    $(".btn ").prop('disabled',false)
-                    $("#loader_map").hide()
-                }, 3000);
-              // prints all the client-side graphics to the console
-          });
-        }
-      });
-    });
+    // view.whenLayerView(featureLayer).then(function(lyrView){
+    //   lyrView.watch("updating", function(val){
+    //     if(!val){  // wait for the layer view to finish updating
+    //       lyrView.queryFeatures().then(function(results){
+    //         setTimeout(function(){
+    //                 console.log("done loading");
+    //                 $("#viewDiv").show()
+    //                 $(".btn ").prop('disabled',false)
+    //                 $("#loader_map").hide()
+    //             }, 3000);
+    //           // prints all the client-side graphics to the console
+    //       });
+    //     }
+    //   });
+    // });
 
 	// symbol for input point
 	var markerSymbol = {
           type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
           color: [255, 0, 0],
+          outline: { // autocasts as new SimpleLineSymbol()
+            color: [255, 255, 255],
+            width: 2
+          }
+        };
+    var markerSymbol2 = {
+          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+          color: [30, 143, 12],
           outline: { // autocasts as new SimpleLineSymbol()
             color: [255, 255, 255],
             width: 2
@@ -150,79 +161,49 @@ require([
 
 	//main function
     // function createPoint(event) {
-    function createPoint() {
-        view.graphics.removeAll();
-         graphicsLayer.removeAll();
+    function createPoint(location) {
+        // view.graphics.removeAll();
+        // graphicsLayer.removeAll();
+        var graphic_re
+        console.log(location)
+        for (graphic in graphicsLayer.graphics.items) {
+            console.log(graphicsLayer.graphics.items[graphic].attributes.id)
+            if (graphicsLayer.graphics.items[graphic].attributes.id == location) {
+                graphic_re = graphicsLayer.graphics.items[graphic];
+            }
+        }
+        console.log(graphic_re)
+        graphicsLayer.remove(graphic_re);
+
         var draw = new Draw({
             view: view
         });
          // tb = new Draw(map);
          var action = draw.create("point");
-            console.log(action)
-          // action.on("cursor-update", function (evt) {
-          //   console.log(evt.coordinates)
-          // });
-        // fires when a vertex is added
         action.on("draw-complete", function (evt) {
-            console.log(evt)
             // console.log(evt.mapPoint.longitude)
             var point = new Point({
                 x: evt.coordinates[0],
                 y: evt.coordinates[1],
                 spatialReference: view.spatialReference
             });
+            if(location == 'origin'){
+                symbol_marker = markerSymbol2
+            }
+            else{
+                symbol_marker = markerSymbol
+            }
             var inputGraphic = new Graphic({
                 geometry: point,
-                symbol: markerSymbol,
-                attributes:{'id':'input_point'}
+                symbol: symbol_marker,
+                attributes:{'id':location}
             });
             console.log(view)
-             graphicsLayer.add(inputGraphic);
+            graphicsLayer.add(inputGraphic);
              // view.graphics.add(inputGraphic);
         })
 
-        // console.log(event.mapPoint.longitude)
-        // console.log(event.mapPoint.latitude)
-        //   graphicsLayer.removeAll();
-        //   var point = new Point({
-        //     longitude: event.mapPoint.longitude,
-        //     latitude: event.mapPoint.latitude
-        //   });
-        //
-        //   var inputGraphic = new Graphic({
-        //     geometry: point,
-        //     symbol: markerSymbol,
-        //       attributes:{'id':'input_point'}
-        //   });
-        //
-        //   graphicsLayer.add(inputGraphic);
-        //     console.log(graphicsLayer)
-        //   var inputGraphicContainer = [];
-        //   inputGraphicContainer.push(inputGraphic);
-        //
-        //   console.log(inputGraphicContainer)
-        //   var featureSet = new FeatureSet();
-        //   featureSet.features = inputGraphicContainer;
-        //
-        //   var bfDistance = new LinearUnit();
-        //   bfDistance.distance = 100;
-        //   bfDistance.units = "miles";
-        //
-		 //  // input parameters
-        //   // var params = {
-        //    //  "Point": featureSet,
-        //    //  "Distance": bfDistance
-        //   // };
-        //
-        //   // var params = {
-        //   //   "Input_Features": featureSet,
-        //   //   "Distance": bfDistance
-        //   // };
-        //    var params = {
-        //     "Pour_Point": featureSet,
-        //   };
 
-          // gp.submitJob(params).then(completeCallback, errBack, statusCallback);
     }
     function getRoutes(){
         console.log("getting route information")
@@ -234,12 +215,16 @@ require([
         var uber_cost = $("#uberCost").val();
         var avg_speed = $("#averSpeed").val();
         var rest_sel = $("#sel1").val();
-        var featureSet = new FeatureSet();
+        var featureSet_origin = new FeatureSet();
+        var featureSet_destination = new FeatureSet();
 
         for (graphic in graphicsLayer.graphics.items){
             console.log()
-            if (graphicsLayer.graphics.items[graphic].attributes.id == 'input_point'){
-                featureSet.features = [graphicsLayer.graphics.items[graphic]];
+            if (graphicsLayer.graphics.items[graphic].attributes.id == 'origin'){
+                featureSet_origin.features = [graphicsLayer.graphics.items[graphic]];
+            }
+            if (graphicsLayer.graphics.items[graphic].attributes.id == 'destination'){
+                featureSet_destination.features = [graphicsLayer.graphics.items[graphic]];
             }
         }
 
@@ -260,7 +245,8 @@ require([
             "placeholder": uber_cost,
             "placeholder": avg_speed,
             "placeholder": rest_sel,
-            "placeholder": featureSet,
+            "placeholder": featureSet_origin,
+            "placeholder": featureSet_destination,
         };
         // gp.submitJob(params).then(completeCallback, errBack, statusCallback);
     }
@@ -365,6 +351,7 @@ require([
 
 ready(init)
 });
+
 function openCity(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
