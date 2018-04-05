@@ -87,7 +87,25 @@ require([
 
     var symbolLine = {
       type: "simple-line",  // autocasts as new SimpleLineSymbol()
-      color: [225, 51, 204],
+      color: [75, 251, 52],
+      width: "2px",
+      // style: "short-dot"
+	};
+     var bus_routes_color = {
+      type: "simple-line",  // autocasts as new SimpleLineSymbol()
+      color: [75, 251, 52],
+      width: "2px",
+      style: "short-dot"
+	};
+      var sponsored_color = {
+      type: "simple-line",  // autocasts as new SimpleLineSymbol()
+      color: [75, 251, 52],
+      width: "2px",
+      style: "short-dot"
+	};
+       var uber_color = {
+      type: "simple-line",  // autocasts as new SimpleLineSymbol()
+      color: [75, 251, 52],
       width: "2px",
       style: "short-dot"
 	};
@@ -303,7 +321,7 @@ require([
         console.log('CCCCCCCCCCCCCCCCCCCClip')
         var polygon_feature3 = data.value.features;
         for (fea in polygon_feature3){
-            polygon_feature3[fea].symbol = symbolLine;
+            polygon_feature3[fea].symbol = bus_routes_color;
 
 
             // var polygon_feature1 = data.value.features[1];
