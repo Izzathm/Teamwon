@@ -24,9 +24,16 @@ require([
     basemap: "streets"
 	});
 
+     var symbolLine = {
+      type: "simple-line",  // autocasts as new SimpleLineSymbol()
+      color: [149, 194, 115],
+      width: "2px",
+      style: "style_solid"
+	};
     featureLayer = new FeatureLayer({
             url: "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Utah_bus_stops/FeatureServer/",
         });
+    featureLayer.symbol = symbolLine
     map.layers.add(featureLayer);
 
     // leg_dem = document.getElementById("legend_dem")
@@ -85,29 +92,24 @@ require([
           }
         };
 
-    var symbolLine = {
-      type: "simple-line",  // autocasts as new SimpleLineSymbol()
-      color: [75, 251, 52],
-      width: "2px",
-      // style: "short-dot"
-	};
+
      var bus_routes_color = {
       type: "simple-line",  // autocasts as new SimpleLineSymbol()
       color: [75, 251, 52],
       width: "2px",
-      style: "short-dot"
+      style: "style_solid"
 	};
       var sponsored_color = {
       type: "simple-line",  // autocasts as new SimpleLineSymbol()
-      color: [75, 251, 52],
+      color: [127,74, 190],
       width: "2px",
-      style: "short-dot"
+      style: "style_solid"
 	};
        var uber_color = {
       type: "simple-line",  // autocasts as new SimpleLineSymbol()
-      color: [75, 251, 52],
+      color: [240, 42, 22],
       width: "2px",
-      style: "short-dot"
+      style: "style_solid"
 	};
     // Geoprocessing service url
 	// var gpUrl = "http://geoserver2.byu.edu/arcgis/rest/services/sherry/BufferPoints/GPServer/Buffer%20Points";
