@@ -95,6 +95,7 @@
     <button id="origin_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Select Destination" onclick="app.createPoint('origin')">
         Choose Origin
     </button>
+    <p></p>
     <button id="endPoint_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Select Destination" onclick="app.createPoint('destination')">
         Choose Destination
     </button>
@@ -131,14 +132,32 @@
 <hr>
 <h3>Geoprocessing</h3>
 <div id = "geoprocessing_div">
-    <button id="bus_clip_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="This function clips UTA bus routes with Provo City"onclick="app.clip_bus()">
-        Clip Bus Routes
+    <button id="bus_clip_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="This function clips UTA bus routes with Provo City"onclick="app.getRoutes()">
+        Get Routes
     </button>
     <p></p>
     <!--<button id="get_routes_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="This function will generate a route to your destination"onclick="app.getRoutes()">-->
         <!--Get Routes-->
     <!--</button>-->
 </div>
+<table>
+  <tr>
+    <th>Legend</th>
+    <th></th>
+  </tr>
+  <tr>
+      <td>Bus Routes&nbsp</td>
+      <td style="background-color: rgb(75, 251, 52)">&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+  </tr>
+  <tr>
+    <td>Sponsored&nbsp</td>
+    <td style="background-color: rgb(127,74, 190)"></td>
+  </tr>
+  <tr>
+    <td>Uber&nbsp</td>
+    <td style="background-color: rgb(240, 42, 22)"></td>
+  </tr>
+</table>
 <img id="loader" src="{% static 'teamwon_mas/images/loader.gif' %}" style="width:100px; display:none">
 {% endblock %}
 

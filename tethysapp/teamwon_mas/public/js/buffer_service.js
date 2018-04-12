@@ -127,40 +127,27 @@ require([
 	// var gpUrl = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/BufferPoints/GPServer/Buffer%20Points";
 	var gpUrl = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/CreateWatershedPolygon/GPServer/Create%20Watershed%20Polygon";
 	var gpUrl_clip = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Provo_Repro/GPServer/Provo_clip";
-
+    var gpSponsored = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Sponsored/GPServer/Sponsored";
+    var gpUber = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Uber_Route/GPServer/Uber_Route";
+    var gpBus = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Bus_Route/GPServer/Bus_Route";
     // create a new Geoprocessor
 
     var gp = new Geoprocessor(gpUrl);
 	var gp_clip = new Geoprocessor(gpUrl_clip);
-
+    var gp_spon = new Geoprocessor(gpSponsored)
+    var gp_uber = new Geoprocessor(gpUber)
+    var gp_bus = new Geoprocessor(gpBus)
 
 	// define output spatial reference
     gp.outSpatialReference = { // autocasts as new SpatialReference()
           wkid: 102100 //EPSG3857
           // wkid: 4326 //EPSG3857
         };
+    gp_uber.outSpatialReference = { // autocasts as new SpatialReference()
+          wkid: 3857 //EPSG3857
+          // wkid: 4326 //EPSG3857
+        };
 
-	//add map click function
-    // view.on("click", createPoint);
-    // view.on("click", clip_bus);
-    // function initToolbar() {
-    //   tb = new Draw(map);
-    //   tb.on("draw-end", addGraphic);
-    //
-    //   // event delegation so a click handler is not
-    //   // needed for each individual button
-    //   on(dom.byId("info"), "click", function(evt) {
-    //     if ( evt.target.id === "info" ) {
-    //       return;
-    //     }
-    //     var tool = evt.target.id.toLowerCase();
-    //     map.disableMapNavigation();
-    //     tb.activate(tool);
-    //   });
-    // }
-
-	//main function
-    // function createPoint(event) {
     function createPoint(location) {
         // view.graphics.removeAll();
         // graphicsLayer.removeAll();
@@ -181,6 +168,7 @@ require([
          // tb = new Draw(map);
          var action = draw.create("point");
         action.on("draw-complete", function (evt) {
+            console.log(view.spatialReference)
             // console.log(evt.mapPoint.longitude)
             var point = new Point({
                 x: evt.coordinates[0],
@@ -219,9 +207,10 @@ require([
         var featureSet_destination = new FeatureSet();
 
         for (graphic in graphicsLayer.graphics.items){
-            console.log()
+            console.log(graphicsLayer.graphics.items[graphic].attributes.id)
             if (graphicsLayer.graphics.items[graphic].attributes.id == 'origin'){
                 featureSet_origin.features = [graphicsLayer.graphics.items[graphic]];
+                console.log(graphicsLayer.graphics.items[graphic])
             }
             if (graphicsLayer.graphics.items[graphic].attributes.id == 'destination'){
                 featureSet_destination.features = [graphicsLayer.graphics.items[graphic]];
@@ -235,60 +224,46 @@ require([
         console.log(uber_cost);
         console.log(avg_speed);
         console.log(rest_sel);
-        console.log(featureSet);
+        fastName = 'McDonalds'
 
-        var params = {
-            "placeholder": uber_chk,
-            "placeholder": spon_chk,
-            "placeholder": bus_chk,
-            "placeholder": walk_chk,
-            "placeholder": uber_cost,
-            "placeholder": avg_speed,
-            "placeholder": rest_sel,
-            "placeholder": featureSet_origin,
-            "placeholder": featureSet_destination,
+        var params_spon = {
+            "Expression": "Field1 = '" + fastName + "'",
+            "Start": featureSet_origin,
+            "End": featureSet_destination,
         };
-        // gp.submitJob(params).then(completeCallback, errBack, statusCallback);
-    }
-    function bufferPoint(){
-        $(".btn ").prop('disabled',true)
-        $("#loader_map").show()
-        var featureSet = new FeatureSet();
-        // featureSet.features = inputGraphicContainer;
-        for (graphic in graphicsLayer.graphics.items){
-            console.log()
-            if (graphicsLayer.graphics.items[graphic].attributes.id == 'input_point'){
-                featureSet.features = [graphicsLayer.graphics.items[graphic]];
-            }
-        }
-        // featureSet.features = [graphicsLayer.graphics.items[0]];
         var params = {
-            "Pour_Point": featureSet,
-          };
-
-          gp.submitJob(params).then(completeCallback, errBack, statusCallback);
-    }
-
-
-    function clip_bus(event) {
-
-        graphicsLayer.removeAll();
-
-        $(".btn ").prop('disabled',true)
-        $("#loader_map").show()
-
-        sql_expression = "\"Name\":'Provo'"
-        var params = {
-        "BusRoutes_UTA ": "BusRoutes_UTA",
-           // "Expression":sql_expression
-
+            "Start": featureSet_origin,
+            "End": featureSet_destination,
         };
-        gp_clip.submitJob(params).then(completeCallback_clip, errBack, statusCallback);
+
+        var params_bus = {
+            "Start": featureSet_origin,
+            "End": featureSet_destination,
+        };
+
+        gp_uber.submitJob(params).then(completeCallback, errBack, statusCallback);
+        // gp_bus.submitJob(params_bus).then(completeCallback_bus, errBack, statusCallback);
+        // gp_spon.submitJob(params_spon).then(completeCallback_spon, errBack, statusCallback);
     }
+
 
 	function completeCallback(result){
 
-        gp.getResultData(result.jobId, "Output_Watershed ").then(drawResult, drawResultErrBack);
+        gp_uber.getResultData(result.jobId, "Reprojected_Route").then(drawResult, drawResultErrBack);
+
+	}
+	function completeCallback_bus(result){
+
+        gp_bus.getResultData(result.jobId, "start_stop").then(drawResult_bus, drawResultErrBack);
+        gp_bus.getResultData(result.jobId, "stop_stop ").then(drawResult_bus, drawResultErrBack);
+        gp_bus.getResultData(result.jobId, "stop_end").then(drawResult_bus, drawResultErrBack);
+
+	}
+
+	function completeCallback_spon(result){
+
+        gp_spon.getResultData(result.jobId, "start_to_food").then(drawResult_spon, drawResultErrBack);
+        gp_spon.getResultData(result.jobId, "food_to_end ").then(drawResult_spon, drawResultErrBack);
 
 	}
 
@@ -297,28 +272,50 @@ require([
 	}
 
 	function drawResult(data){
-        console.log(data)
-	    var polygon_feature = data.value.features[0];
-		polygon_feature.symbol = fillSymbol;
-		graphicsLayer.add(polygon_feature);
+        var polygon_feature3 = data.value.features;
+        for (fea in polygon_feature3){
+            polygon_feature3[fea].symbol = uber_color;
+            graphicsLayer.add( polygon_feature3[fea]);
+        }
+        $(".btn ").prop('disabled',false)
+        $("#loader_map").hide()
         $(".btn ").prop('disabled',false)
         $("#loader_map").hide()
 	}
-	function drawResult_clip(data){
+    function drawResult_spon(data){
+        var polygon_feature3 = data.value.features;
+        for (fea in polygon_feature3){
+            polygon_feature3[fea].symbol = sponsored_color;
+            graphicsLayer.add( polygon_feature3[fea]);
+        }
+        $(".btn ").prop('disabled',false);
+        $("#loader_map").hide();
+        $(".btn ").prop('disabled',false);
+        $("#loader_map").hide();
+	}
+
+	function drawResult_bus(data){
         console.log(data)
         console.log('CCCCCCCCCCCCCCCCCCCClip')
         var polygon_feature3 = data.value.features;
         for (fea in polygon_feature3){
             polygon_feature3[fea].symbol = bus_routes_color;
-
-
-            // var polygon_feature1 = data.value.features[1];
-            // graphicsLayer.add(polygon_feature);
             graphicsLayer.add( polygon_feature3[fea]);
-            // graphicsLayer.add(polygon_feature1);
         }
-        $(".btn ").prop('disabled',false)
+        $(".btn ").prop('disabled',false);
+        $("#loader_map").hide();
+        $(".btn ").prop('disabled',false);
         $("#loader_map").hide()
+	};
+
+	function drawResult_clip(data){
+        var polygon_feature3 = data.value.features;
+        for (fea in polygon_feature3){
+            polygon_feature3[fea].symbol = bus_routes_color;
+            graphicsLayer.add( polygon_feature3[fea]);
+        }
+        $(".btn ").prop('disabled',false);
+        $("#loader_map").hide();
 	}
 
 	function drawResultErrBack(err) {
@@ -330,7 +327,6 @@ require([
 
 	function statusCallback(data) {
         console.log(data.jobStatus);
-
     }
 
     function errBack(err) {
@@ -342,8 +338,8 @@ require([
     function showLoading(){
         console.log("show loading")
     }
-    app = {clip_bus: clip_bus,
-            bufferPoint:bufferPoint,
+    app = {
+            // bufferPoint:bufferPoint,
         createPoint:createPoint,
         getRoutes:getRoutes
     };
