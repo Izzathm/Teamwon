@@ -242,8 +242,8 @@ require([
         };
 
         gp_uber.submitJob(params).then(completeCallback, errBack, statusCallback);
-        // gp_bus.submitJob(params_bus).then(completeCallback_bus, errBack, statusCallback);
-        // gp_spon.submitJob(params_spon).then(completeCallback_spon, errBack, statusCallback);
+        //gp_bus.submitJob(params_bus).then(completeCallback_bus, errBack, statusCallback);
+        //gp_spon.submitJob(params_spon).then(completeCallback_spon, errBack, statusCallback);
     }
 
 
@@ -271,12 +271,27 @@ require([
         gp_clip.getResultData(result.jobId, "Clip_bus_Project").then(drawResult_clip, drawResultErrBack);
 	}
 
+    //	var time_uber;
+    //	var time_spon;
+    //	var time_bus;
+
 	function drawResult(data){
         var polygon_feature3 = data.value.features;
+        //var uber_length = 0;
+
         for (fea in polygon_feature3){
             polygon_feature3[fea].symbol = uber_color;
             graphicsLayer.add( polygon_feature3[fea]);
+
+            //read the Shape_Length attribute from each feature
+//            console("ssssssssssssssssssssssssss");
+//            console(fea.Shape_Length)
+            //fea_length = fea.Shape_Length
+            //uber_length = uber_length + fea_length;
         }
+
+        //time_uber = time_calc(uber_length);
+
         $(".btn ").prop('disabled',false)
         $("#loader_map").hide()
         $(".btn ").prop('disabled',false)
@@ -367,4 +382,12 @@ function openCity(evt, cityName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+}
+
+function time_calc(length) {
+
+var speedLimit = 25.00;
+
+var time = length/speedLimit
+
 }
