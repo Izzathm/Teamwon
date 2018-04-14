@@ -13,12 +13,22 @@
 {% block app_title %}{{ tethys_app.name }}{% endblock %}
 
 {% block app_navigation_items %}
-  <li class="title">App Navigation</li>
-  <li class="active"><a href="{% url 'teamwon_mas:home' %}">Home</a></li>
-  <li class="active"><a href="{% url 'teamwon_mas:proposal' %}">Project Proposal</a></li>
-  <li class="active"><a href="{% url 'teamwon_mas:diagrams' %}">Mock Up Diagrams</a></li>
-  <li class="active"><a href="{% url 'teamwon_mas:mapview' %}">Map</a></li>
+  <button class="tablinks" data-toggle="collapse" data-target="#demo4" style = "border:none;background-color:#00000000">
+      <h3>Navigation</h3>
+  </button>
+<div id="demo4" class="collapse in">
+  <div class="btn-group-vertical" role="group" aria-label="Basic example">
+    <a class="btn btn-primary" href="{% url 'teamwon_mas:home' %}" role="button">Home</a>
+    <a class="btn btn-primary" href="{% url 'teamwon_mas:proposal' %}" role="button">Project Proposal</a>
+    <a class="btn btn-primary" href="{% url 'teamwon_mas:diagrams' %}" role="button">Mock Up Diagrams</a>
+    <a class="btn btn-primary" href="{% url 'teamwon_mas:mapview' %}" role="button">Map</a>
+  </div>
+    <!--<li ><a class = "btn btn-primary" href="{% url 'teamwon_mas:home' %}">Home</a></li>-->
+    <!--<li class="list active"><a href="{% url 'teamwon_mas:proposal' %}">Project Proposal</a></li>-->
+    <!--<li class="list-group-item active"><a href="{% url 'teamwon_mas:diagrams' %}">Mock Up Diagrams</a></li>-->
+    <!--<li class="list-group-item active"><a href="{% url 'teamwon_mas:mapview' %}">Map</a></li>-->
 
+</div>
 
 
 {% endblock %}
