@@ -381,7 +381,7 @@ require([
         if(bus_chk){
             last_fun = 'bus';
             gp_bus.submitJob(params_bus).then(completeCallback_bus, errBack, statusCallback);
-        }
+        } 
     }
 
 
@@ -439,8 +439,11 @@ require([
 
 	function drawResult(data){
         var polygon_feature3 = data.value.features;
+        //var uber_length = 0;
+
         for (fea in polygon_feature3){
             polygon_feature3[fea].symbol = uber_color;
+
             uber_len.push(polygon_feature3[fea].attributes)
             polygon_feature3[fea].attributes.cus_id = 'uber';
             uberGraphicLayer.add(polygon_feature3[fea]);
@@ -694,4 +697,12 @@ function openCity(evt, cityName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+}
+
+function time_calc(length) {
+
+var speedLimit = 25.00;
+
+var time = length/speedLimit
+
 }
