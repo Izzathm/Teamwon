@@ -698,11 +698,3 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-
-function time_calc(length) {
-
-var speedLimit = 25.00;
-
-var time = length/speedLimit
-
-}
