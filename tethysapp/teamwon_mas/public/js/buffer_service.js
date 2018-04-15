@@ -115,16 +115,16 @@ require([
     $(".btn ").prop('disabled',false)
     $("#loader_map").hide()
 
-    // view.whenLayerView(featureLayer).then(function(lyrView){
+    // view.whenLayerView(provoCity).then(function(lyrView){
     //   lyrView.watch("updating", function(val){
     //     if(!val){  // wait for the layer view to finish updating
     //       lyrView.queryFeatures().then(function(results){
-    //         setTimeout(function(){
+    //         // setTimeout(function(){
     //                 console.log("done loading");
     //                 $("#viewDiv").show()
     //                 $(".btn ").prop('disabled',false)
     //                 $("#loader_map").hide()
-    //             }, 3000);
+    //             // }, 3000);
     //           // prints all the client-side graphics to the console
     //       });
     //     }
@@ -286,7 +286,19 @@ require([
                     // view.goTo({target:results.features[0].geometry,zoom:1});
                 }
                 else{
-                    alert("Please select a point in Provo")
+                    // alert("Please select a point in Provo")
+                    $("#outAlert").html("<div  class=\"alert alert-danger alert-dismissible\">\n" +
+                        "      <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
+                        "      <strong>Error!</strong> Please select a point in Provo.\n" +
+                        "    </div>")
+                    // message = "Please select a point in Provo"
+                    // swal({
+                    //     title: "Error!",
+                    //     text: message,
+                    //     type: "error",
+                    //     confirmButtonText: "OK",
+                    //     allowOutsideClick: true
+                    // });
                 }
                 console.log(connected)
 
@@ -302,15 +314,10 @@ require([
         //         graphicsLayer.remove(graphic_re);
         //     }
         // }
-        startLoading()
         console.log("getting route information")
         var uber_chk = $("#uberChk").is(':checked')
         var spon_chk = $("#redFareChk").is(':checked')
         var bus_chk = $("#busesChk").is(':checked')
-
-        var uber_cost = $("#uberCost").val();
-        var avg_speed = $("#averSpeed").val();
-        var bus_cost = $("#busCost").val();
 
         var rest_sel = $("#sel1").val();
         var featureSet_origin = new FeatureSet();
@@ -331,14 +338,8 @@ require([
 
 
         featureSet_destination.features = [graphicsDestination.graphics.items[0]];
-
-
-        console.log(uber_chk);
-        console.log(spon_chk);
-        console.log(bus_chk);
-        console.log(uber_cost);
-        console.log(avg_speed);
-        console.log(rest_sel);
+        console.log(featureSet_origin)
+        console.log(featureSet_destination)
         if (rest_sel == "McDonald's"){fastName="McDonalds"}
         else if(rest_sel == "Wendy's"){fastName="Wendys"}
         else if(rest_sel == "Carl's Jr"){fastName="CARLS JR"}
@@ -364,6 +365,24 @@ require([
         busGraphicLayer.removeAll();
         busStopGraphicLayer.removeAll();
         restStopGraphicLayer.removeAll();
+
+
+        if (graphicsOrigin.graphics.items[0] == undefined ||graphicsOrigin.graphics.items[0] == undefined  ){
+            $("#outAlert").html("<div  class=\"alert alert-danger alert-dismissible\">\n" +
+                "      <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
+                "      <strong>Error!</strong> Please select an origin and a destination.\n" +
+                "    </div>")
+            return
+        }
+        if(!uber_chk && !spon_chk && !bus_chk){
+            $("#outAlert").html("<div  class=\"alert alert-danger alert-dismissible\">\n" +
+                "      <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
+                "      <strong>Error!</strong> Please select at least one route option.\n" +
+                "    </div>")
+            return
+        }
+        startLoading()
+
         $('tr').hide();
         $('#origin').show()
         $('#destination').show()
@@ -371,16 +390,23 @@ require([
 
         if(uber_chk){
             console.log('submit uber')
+            last_fun = 'uber';
+            $("#uber_progress1").show()
+            $('#uber_progress').attr('name',0)
 
-            gp_uber.submitJob(params).then(completeCallback, errBack, statusCallback);
+            gp_uber.submitJob(params).then(completeCallback, errBack, statusCallback_uber);
         }
         if(spon_chk){
             last_fun = 'spon';
-            gp_spon.submitJob(params_spon).then(completeCallback_spon, errBack, statusCallback);
+            $("#spon_progress1").show()
+            $("#spon_progress").attr('name',0)
+            gp_spon.submitJob(params_spon).then(completeCallback_spon, errBack, statusCallback_spon);
         }
         if(bus_chk){
             last_fun = 'bus';
-            gp_bus.submitJob(params_bus).then(completeCallback_bus, errBack, statusCallback);
+            $("#bus_progress1").show()
+            $("#bus_progress").attr('name',0)
+            gp_bus.submitJob(params_bus).then(completeCallback_bus, errBack, statusCallback_bus);
         } 
     }
 
@@ -425,7 +451,6 @@ require([
     }
     function drawResult_point_spon(data) {
         var polygon_feature3 = data.value.features;
-        console.log(data)
         for (fea in polygon_feature3) {
             polygon_feature3[fea].symbol = markerStops_spon;
             restStopGraphicLayer.add(polygon_feature3[fea]);
@@ -451,7 +476,6 @@ require([
          if (last_fun == 'uber'){
             finishedLoading()
         }
-        console.log(uberGraphicLayer)
 	}
 
 
@@ -498,14 +522,47 @@ require([
         $("#loader_map").hide()
     }
 
-	function statusCallback(data) {
-        console.log(data.jobStatus);
+	function statusCallback_uber(data) {
+        var uber_prev = parseFloat($('#uber_progress').attr('name'));
+        // console.log(uber_prev)
+        uber_new = Math.floor((100/20)+uber_prev)
+        $('#uber_progress').attr('name',(100/20)+uber_prev);
+        if (uber_new >= 100){uber_new = 99}
+        // console.log(uber_prev)
+        if (data.jobStatus === 'job-succeeded'){
+            uber_new = 100
+        }
+        $("#uber_progress").css("width", uber_new + "%").text(uber_new + "%");
+
+
+    }
+    function statusCallback_bus(data) {
+        var bus_prev = parseFloat($('#bus_progress').attr('name'));
+        bus_new = Math.ceil((100/75)+bus_prev)
+        $('#bus_progress').attr('name',(100/75)+bus_prev);
+        if (bus_new >= 100){bus_new = 99}
+        if (data.jobStatus === 'job-succeeded'){
+            bus_new = 100
+        }
+        $("#bus_progress").css("width", bus_new + "%").text(bus_new + "%");
+
+    }
+    function statusCallback_spon(data) {
+        var spon_prev = parseFloat($('#spon_progress').attr('name'));
+        spon_new = Math.ceil((100/50)+spon_prev)
+        $('#spon_progress').attr('name',(100/50)+spon_prev);
+        if (spon_new >= 100){spon_new = 99}
+
+        if (data.jobStatus === 'job-succeeded'){
+            spon_new = 100
+        }
+        $("#spon_progress").css("width", spon_new + "%").text(spon_new + "%");
     }
 
     function errBack(err) {
         console.log("gp error: ", err);
         alert("The process failed")
-         $(".btn ").prop('disabled',false)
+        $(".btn ").prop('disabled',false)
         $("#loader_map").hide()
     }
 
@@ -514,17 +571,29 @@ require([
 	    $(".chkbox ").prop('disabled',true);
         $("#loader_map").show();
         $("#viewDiv").hide()
+        $("#spon_progress1").hide()
+        $("#uber_progress1").hide()
+        $("#bus_progress1").hide()
+        console.log('reset progress bar')
+        $("#uber_progress").css("width", 0 + "%").text(0 + "%");
+        $("#spon_progress").css("width", 0 + "%").text(0 + "%");
+        $("#bus_progress").css("width", 0 + "%").text(0 + "%");
     }
 
     function finishedLoading(){
         console.log('all routes loaded')
         process_output()
+        // $("#uber_progress1").hide()
+
         $(".btn ").prop('disabled',false);
         $(".chkbox ").prop('disabled',false);
 
         $("#loader_map").hide();
 
         $("#viewDiv").show()
+        $("#spon_progress1").hide()
+        $("#uber_progress1").hide()
+        $("#bus_progress1").hide()
     }
     function process_output(){
 	    var uber_dis = 0
@@ -643,7 +712,7 @@ require([
 
         }
         else if(route_type =='bus'){
-	        time = 1.1*(distance_con/avg_speed*60);
+	        time = 1.3*(distance_con/avg_speed*60);
             cost = bus_cost
         }
         time = time.toFixed(2)
@@ -663,6 +732,9 @@ ready(init)
 $('tr').hide();
 $('#origin').show()
 $('#destination').show()
+$("#spon_progress1").hide()
+$("#uber_progress1").hide()
+$("#bus_progress1").hide()
 $('#opt_toggle').click(function() {
 
     if($('#demo').attr("class")=='collapse in'){
