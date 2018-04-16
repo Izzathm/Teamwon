@@ -8,7 +8,7 @@ class TeamwonMas(TethysAppBase):
 
     name = 'Mobility As a Service'
     index = 'teamwon_mas:home'
-    icon = 'teamwon_mas/images/icon2.gif'
+    icon = 'teamwon_mas/images/mobile.gif'
     package = 'teamwon_mas'
     root_url = 'teamwon-mas'
     color = '#1D63C5'
