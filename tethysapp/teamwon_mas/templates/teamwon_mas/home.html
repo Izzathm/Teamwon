@@ -9,6 +9,12 @@
 {% endblock %}
 
 
+{% block scripts %}
+{{ block.super }}
+  <script src="{% static 'teamwon_mas/js/main.js'%}"></script>
+{% endblock %}
+
+
 {% block app_content %}
 <style>
 
@@ -60,18 +66,33 @@ The next step is to identify the process you want to follow.
           <h5 class="modal-title" id="help-modal-label">Welcome to Mobility as a Service!</h5>
         </div>
         <div class="modal-body">
-          <img src="{% static 'teamwon_mas/images/intro1nate (copy).PNG' %}" height="600" width="565" >
+          <!--<img src="{% static 'teamwon_mas/images/intro1nate (copy).PNG' %}" height="600" width="565" >-->
+          <div class="w3-content w3-display-container">
+
+            <img class="mySlides" src="{% static 'teamwon_mas/images/intro1nate (copy).PNG' %}" height="600" width="565">
+            <img class="mySlides" src="{% static 'teamwon_mas/images/intro2nate.PNG' %}" height="600" width="565">
+            <img class="mySlides" src="{% static 'teamwon_mas/images/intro3nate.PNG' %}" height="600" width="565">
+
+
+</div>
           <!--<p>You can add custom buttons to the app header using the <code>header_buttons</code> block. Use anchor/link tags for the button and wrap it in a div with the class <code>header-button</code>. For buttons with the gliphyicons, add the <code>glyphicon-button</code> class as well.</p>
           <p>Ever have trouble using a modal in a Tethys app? Use the <code>after_app_content</code> block for modal content to allow them to function properly. See: <a href="https://getbootstrap.com/javascript/#modals">Bootstrap Modals</a></p>
           <p>Add tooltips to any element by adding the <code>data-toggle</code>, <code>data-placement</code>, and <code>title</code> attributes to the button. See: <a href="https://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltips</a></p>
         </div>-->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Next</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          <button type="button" id = "right-click" class="btn btn-default" >Next</button>
+          <button type="button"  class="btn btn-primary" data-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+
+
+{% block content_dependent_styles %}
+  {{ block.super }}
+  <link href="{% static 'teamwon_mas/css/main.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 {% endblock %}
 
 {% block app_actions %}
