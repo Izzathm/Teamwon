@@ -205,7 +205,7 @@ require([
     var gpUber = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Uber_Route/GPServer/Uber_Route";
     var gpBus = "http://geoserver2.byu.edu/arcgis/rest/services/TeamWon/Bus_Route_wstops/GPServer/Bus_Route_wstops";
     // create a new Geoprocessor
-
+    var test
     var gp = new Geoprocessor(gpUrl);
 	var gp_clip = new Geoprocessor(gpUrl_clip);
     var gp_spon = new Geoprocessor(gpSponsored)
@@ -235,8 +235,16 @@ require([
         var draw = new Draw({
             view: view
         });
-        var action = draw.create("point");
-        action.on("draw-complete", function (evt) {
+        var action
+        action = draw.create("point");
+        try{
+            test.remove()
+            console.log('remove test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        }
+        catch(err){
+            test = null
+        }
+        test = action.on("draw-complete", function (evt) {
 
             var point = new Point({
                 x: evt.coordinates[0],
@@ -348,7 +356,7 @@ require([
         bus_len = [];
 
 
-        if (graphicsOrigin.graphics.items[0] == undefined ||graphicsOrigin.graphics.items[0] == undefined  ){
+        if (graphicsOrigin.graphics.items[0] == undefined ||graphicsDestination.graphics.items[0] == undefined  ){
             $("#outAlert").html("<div  class=\"alert alert-danger alert-dismissible\">\n" +
                 "      <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                 "      <strong>Error!</strong> Please select an origin and a destination.\n" +
