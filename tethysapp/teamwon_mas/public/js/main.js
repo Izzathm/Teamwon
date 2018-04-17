@@ -1,6 +1,5 @@
 $(window).load(function(){
    $('#help-modal').modal('show');
-   console.log ("nates pets")
 
     var slideIndex = 1;
     showDivs(slideIndex);
@@ -16,7 +15,6 @@ $(window).load(function(){
     });
 
     function showDivs(n) {
-      console.log("11111111111111111111111111")
       var i;
       var x = document.getElementsByClassName("mySlides");
       if (n > x.length) {slideIndex = 1}

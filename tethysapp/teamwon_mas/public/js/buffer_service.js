@@ -115,23 +115,6 @@ require([
     $(".btn ").prop('disabled',false)
     $("#loader_map").hide()
 
-    // view.whenLayerView(provoCity).then(function(lyrView){
-    //   lyrView.watch("updating", function(val){
-    //     if(!val){  // wait for the layer view to finish updating
-    //       lyrView.queryFeatures().then(function(results){
-    //         // setTimeout(function(){
-    //                 console.log("done loading");
-    //                 $("#viewDiv").show()
-    //                 $(".btn ").prop('disabled',false)
-    //                 $("#loader_map").hide()
-    //             // }, 3000);
-    //           // prints all the client-side graphics to the console
-    //       });
-    //     }
-    //   });
-    // });
-
-
 
 	// symbol for input point
 	var markerSymbol = {
@@ -225,7 +208,6 @@ require([
     function createPoint(location) {
         var graphic_re
         if (location == 'origin'){
-            console.log(graphicsOrigin.graphics);
             graphicsOrigin.removeAll();
         }
         else{
@@ -239,7 +221,6 @@ require([
         action = draw.create("point");
         try{
             test.remove()
-            console.log('remove test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         }
         catch(err){
             test = null
@@ -267,17 +248,13 @@ require([
 
             provoCity.queryFeatures().then(function(results){
                 if (geometryEngine.contains(results.features[0].geometry, inputGraphic.geometry)) {
-                    console.log(location)
                     // graphicsLayer.add(inputGraphic);
                      if (location == 'origin'){
-                         console.log('adding origin')
                         graphicsOrigin.add(inputGraphic);
                     }
                     else{
-                         console.log('adding destination')
                         graphicsDestination.add(inputGraphic);
                     }
-                    console.log('#######################################')
                 }
                 else{
                     $("#outAlert").html("<div  class=\"alert alert-danger alert-dismissible\">\n" +
@@ -289,18 +266,10 @@ require([
             });
 
         })
-        console.log("done with point creation")
     }
 
     function getRoutes(){
-        // for (graphic in graphicsLayer.graphics.items) {
-        //     console.log(graphicsLayer.graphics.items[graphic].attributes.id)
-        //     if (graphicsLayer.graphics.items[graphic].attributes.id != 'origin'&& graphicsLayer.graphics.items[graphic].attributes.id != 'destination') {
-        //         graphic_re = graphicsLayer.graphics.items[graphic];
-        //         graphicsLayer.remove(graphic_re);
-        //     }
-        // }
-        console.log("getting route information")
+
         var uber_chk = $("#uberChk").is(':checked')
         var spon_chk = $("#redFareChk").is(':checked')
         var bus_chk = $("#busesChk").is(':checked')
@@ -309,23 +278,11 @@ require([
         var featureSet_origin = new FeatureSet();
         var featureSet_destination = new FeatureSet();
 
-        // for (graphic in graphicsLayer.graphics.items){
-        //     console.log(graphicsLayer.graphics.items[graphic].attributes.id)
-        //     if (graphicsLayer.graphics.items[graphic].attributes.id == 'origin'){
-        //         featureSet_origin.features = [graphicsLayer.graphics.items[graphic]];
-        //         console.log(graphicsLayer.graphics.items[graphic])
-        //     }
-        //     if (graphicsLayer.graphics.items[graphic].attributes.id == 'destination'){
-        //         featureSet_destination.features = [graphicsLayer.graphics.items[graphic]];
-        //     }
-        // }
 
         featureSet_origin.features = [graphicsOrigin.graphics.items[0]];
 
 
         featureSet_destination.features = [graphicsDestination.graphics.items[0]];
-        console.log(featureSet_origin)
-        console.log(featureSet_destination)
         if (rest_sel == "McDonald's"){fastName="McDonalds"}
         else if(rest_sel == "Wendy's"){fastName="Wendys"}
         else if(rest_sel == "Carl's Jr"){fastName="CARLS JR"}
@@ -378,7 +335,6 @@ require([
 
 
         if(uber_chk){
-            console.log('submit uber')
             last_fun = 'uber';
             $("#uber_progress1").show()
             $('#uber_progress').attr('name',0)
@@ -511,11 +467,9 @@ require([
 
 	function statusCallback_uber(data) {
         var uber_prev = parseFloat($('#uber_progress').attr('name'));
-        // console.log(uber_prev)
         uber_new = Math.floor((100/20)+uber_prev)
         $('#uber_progress').attr('name',(100/20)+uber_prev);
         if (uber_new >= 100){uber_new = 99}
-        // console.log(uber_prev)
         if (data.jobStatus === 'job-succeeded'){
             uber_new = 100
         }
@@ -561,16 +515,13 @@ require([
         $("#spon_progress1").hide()
         $("#uber_progress1").hide()
         $("#bus_progress1").hide()
-        console.log('reset progress bar')
         $("#uber_progress").css("width", 0 + "%").text(0 + "%");
         $("#spon_progress").css("width", 0 + "%").text(0 + "%");
         $("#bus_progress").css("width", 0 + "%").text(0 + "%");
     }
 
     function finishedLoading(){
-        console.log('all routes loaded')
         process_output()
-        // $("#uber_progress1").hide()
 
         $(".btn ").prop('disabled',false);
         $(".chkbox ").prop('disabled',false);
@@ -585,9 +536,7 @@ require([
     function process_output(){
 	    var uber_dis = 0
         for (shape in uber_len){
-	        console.log(uber_dis)
             uber_dis = uber_dis + uber_len[shape].Shape_Length
-            console.log(uber_dis)
         }
         var bus_dis = 0
         for (shape in bus_len){
@@ -603,7 +552,6 @@ require([
             $('#uber_main').show()
 
 	        var value = timediscost('uber', uber_dis)
-            console.log('afsadfds')
 	        var uber_table = "<td></td>\n" +
             "        <td>\n" +
             "        <table >\n" +
@@ -747,8 +695,7 @@ $('#opt_toggle').click(function() {
     }
 })
 $('.gly').click(function() {
-    console.log(this)
-    console.log(this.name)
+
     $('#'+this.name+'_add').toggle()
 })
 function openCity(evt, cityName) {
