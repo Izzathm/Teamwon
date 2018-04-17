@@ -225,22 +225,12 @@ require([
     function createPoint(location) {
         var graphic_re
         if (location == 'origin'){
-            graphicsOrigin.remove(graphicsOrigin.graphics.items[0]);
+            console.log(graphicsOrigin.graphics);
+            graphicsOrigin.removeAll();
         }
         else{
-            graphicsDestination.remove(graphicsDestination.graphics.items[0]);
+            graphicsDestination.removeAll();
         }
-
-
-        //
-        // for (graphic in graphicsLayer.graphics.items) {
-        //     console.log(graphicsLayer.graphics.items[graphic].attributes.id)
-        //     if (graphicsLayer.graphics.items[graphic].attributes.id == location) {
-        //         graphic_re = graphicsLayer.graphics.items[graphic];
-        //     }
-        // }
-        // console.log(graphic_re)
-        // graphicsLayer.remove(graphic_re);
 
         var draw = new Draw({
             view: view
@@ -269,41 +259,29 @@ require([
 
             provoCity.queryFeatures().then(function(results){
                 if (geometryEngine.contains(results.features[0].geometry, inputGraphic.geometry)) {
-
+                    console.log(location)
                     // graphicsLayer.add(inputGraphic);
                      if (location == 'origin'){
+                         console.log('adding origin')
                         graphicsOrigin.add(inputGraphic);
                     }
                     else{
+                         console.log('adding destination')
                         graphicsDestination.add(inputGraphic);
                     }
-                    console.log(graphicsOrigin)
-                    // var options = {
-                    //   zoom: 5
-                    //
-                    // };
-                    // view.goTo({target:inputGraphic,zoom:16});
-                    // view.goTo({target:results.features[0].geometry,zoom:1});
+                    console.log('#######################################')
                 }
                 else{
-                    // alert("Please select a point in Provo")
                     $("#outAlert").html("<div  class=\"alert alert-danger alert-dismissible\">\n" +
                         "      <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                         "      <strong>Error!</strong> Please select a point in Provo.\n" +
                         "    </div>")
-                    // message = "Please select a point in Provo"
-                    // swal({
-                    //     title: "Error!",
-                    //     text: message,
-                    //     type: "error",
-                    //     confirmButtonText: "OK",
-                    //     allowOutsideClick: true
-                    // });
                 }
-                console.log(connected)
 
             });
+
         })
+        console.log("done with point creation")
     }
 
     function getRoutes(){
@@ -365,6 +343,9 @@ require([
         busGraphicLayer.removeAll();
         busStopGraphicLayer.removeAll();
         restStopGraphicLayer.removeAll();
+        uber_len = [];
+        spon_len = [];
+        bus_len = [];
 
 
         if (graphicsOrigin.graphics.items[0] == undefined ||graphicsOrigin.graphics.items[0] == undefined  ){
@@ -465,10 +446,8 @@ require([
 	function drawResult(data){
         var polygon_feature3 = data.value.features;
         //var uber_length = 0;
-
         for (fea in polygon_feature3){
             polygon_feature3[fea].symbol = uber_color;
-
             uber_len.push(polygon_feature3[fea].attributes)
             polygon_feature3[fea].attributes.cus_id = 'uber';
             uberGraphicLayer.add(polygon_feature3[fea]);
@@ -598,7 +577,9 @@ require([
     function process_output(){
 	    var uber_dis = 0
         for (shape in uber_len){
+	        console.log(uber_dis)
             uber_dis = uber_dis + uber_len[shape].Shape_Length
+            console.log(uber_dis)
         }
         var bus_dis = 0
         for (shape in bus_len){
@@ -697,14 +678,18 @@ require([
 	    var uber_cost_mile = parseFloat($("#uberCost").val());
 	    var uber_cost_min = parseFloat($("#uberCost_min").val());
 	    var uber_cost_base = parseFloat($("#uberCost_base").val());
+	    var uber_minimum = parseFloat($("#uberCost_minimum").val());
         var avg_speed = parseFloat($("#averSpeed").val());
         var bus_cost = parseFloat($("#busCost").val());
-        var distance_con = distance *0.000621371
+        var distance_con = distance *0.000621371 / 1.305
         var time = 0;
         var cost = 0;
 	    if(route_type =='uber'){
             time = distance_con/avg_speed*60;
             cost = uber_cost_base+uber_cost_mile*distance_con+uber_cost_min*time
+            if (cost < uber_minimum){
+                cost = uber_minimum
+            }
         }
         else if(route_type =='spon'){
 	        time = distance_con/avg_speed*60+20
@@ -735,6 +720,14 @@ $('#destination').show()
 $("#spon_progress1").hide()
 $("#uber_progress1").hide()
 $("#bus_progress1").hide()
+var browser = navigator.userAgent.toLowerCase().indexOf('chrome') > -1 ? 'chrome' : 'other';
+if (browser == 'chrome'){
+    $("#viewDiv").css("height", "-webkit-fill-available;")
+
+}
+else{
+    $("#viewDiv").css("height", "600px")
+}
 $('#opt_toggle').click(function() {
 
     if($('#demo').attr("class")=='collapse in'){

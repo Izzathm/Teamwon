@@ -275,9 +275,14 @@
             <input id="uberCost_min"type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3" value="0.15">
             <span class="input-group-addon">$/minute</span>
         </div>
-            Base Cost
+            Booking Fee
         <div class="input-group input-group-sm">
             <input id="uberCost_base"type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3" value="2.1">
+            <span class="input-group-addon">$</span>
+        </div>
+        Minimum Fare
+        <div class="input-group input-group-sm">
+            <input id="uberCost_minimum"type="text" class="form-control" placeholder="3" aria-describedby="sizing-addon3" value="6.25">
             <span class="input-group-addon">$</span>
         </div>
 
@@ -332,6 +337,7 @@
 </div>
 <img id="loader_map" src="{% static 'teamwon_mas/images/test.gif' %}" >
 <div id="viewDiv" style="  width:100%;height:-webkit-fill-available;"></div>
+<!--<div id="viewDiv" style="  width:100%;height:500px"></div>-->
 
 {% endblock %}
 
