@@ -74,11 +74,9 @@ require([
 
     leg_bus.onchange =function(){
         busGraphicLayer.visible = leg_bus.checked
-        busStopGraphicLayer.visible = leg_bus.checked
     }
     leg_spon.onchange =function(){
         sponGraphicLayer.visible = leg_spon.checked
-        restStopGraphicLayer.visible = leg_spon.checked
     }
     leg_uber.onchange =function(){
         uberGraphicLayer.visible = leg_uber.checked
@@ -396,6 +394,7 @@ require([
     }
     function drawResult_point_spon(data) {
         var polygon_feature3 = data.value.features;
+        console.log(data)
         for (fea in polygon_feature3) {
             polygon_feature3[fea].symbol = markerStops_spon;
             restStopGraphicLayer.add(polygon_feature3[fea]);
@@ -423,6 +422,8 @@ require([
 
 
     function drawResult_spon(data){
+        console.log(data)
+
         var polygon_feature3 = data.value.features;
         for (fea in polygon_feature3){
             polygon_feature3[fea].symbol = sponsored_color;
