@@ -28,9 +28,11 @@ h6 {font-style: italic;}
   <h3>Putting city access into your hands</h3>
 <p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Un1.svg" style="float:left;width:80px;height:80px;">
-The first step is to chose a point and locate your destination.
+First, go to the map and click "Select Origin", then click a starting point. Do the same for "Select Destination".
 </p>
-<img src="{% static 'teamwon_mas/images/choose destination.PNG' %}" height="200" width="450" >
+<img src="{% static 'teamwon_mas/images/step1viewmap.PNG' %}" height="200" width="300" >
+<img src="{% static 'teamwon_mas/images/divider.png' %}" height="200" width="150" >
+<img src="{% static 'teamwon_mas/images/step2choose.PNG' %}" height="200" width="350" >
 
 <br>
 <br>
@@ -38,9 +40,9 @@ The first step is to chose a point and locate your destination.
 
 <p>
 <img src="http://www.clker.com/cliparts/l/O/r/4/C/p/number-2-square-orange-md.png" style="float:left;width:80px;height:80px;">
-The next step is to identify the process you want to follow.
+Once your points have been selected, filter your route based on an Uber, bus, or sponsored route.
 </p>
-<img src="{% static 'teamwon_mas/images/scroll and click.PNG' %}">
+<img src="{% static 'teamwon_mas/images/step2filter.PNG' %}" height="250" width="270">
 <br>
 
 <br>
@@ -49,8 +51,24 @@ The next step is to identify the process you want to follow.
 
 <p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Japanese_Urban_Expwy_Sign_Number_3.svg/340px-Japanese_Urban_Expwy_Sign_Number_3.svg.png" style="float:left;width:80px;height:80px;">
-     The next step is to identify the process you want to follow.
+     Select "Get Routes" and compare the cost vs. time data for each option. You are also able to toggle on and off each of the different map options.
 </p>
+<img src="{% static 'teamwon_mas/images/step3getroutes.PNG' %}" height="200" width="250" >
+<img src="{% static 'teamwon_mas/images/divider.png' %}" height="200" width="100" >
+<img src="{% static 'teamwon_mas/images/step3data.PNG' %}" height="200" width="300" >
+<img src="{% static 'teamwon_mas/images/divider.png' %}" height="200" width="100" >
+<img src="{% static 'teamwon_mas/images/step3sample.PNG' %}" height="200" width="250" >
+<br>
+
+<br>
+<br>
+<br>
+
+<p>
+<img src="{% static 'teamwon_mas/images/4.jpg' %}" style="float:left;width:80px;height:80px;">
+By selecting "Advanced Options" you are able to edit the controls, such as cost per mile or speed limit, making the results more accurate.
+</p>
+<img src="{% static 'teamwon_mas/images/step4advanced.PNG' %}" height="250" width="270">
 
 
 {% endblock %}
@@ -71,7 +89,7 @@ The next step is to identify the process you want to follow.
 
             <img class="mySlides" src="{% static 'teamwon_mas/images/intro1nate (copy).PNG' %}" height="600" width="565">
             <img class="mySlides" src="{% static 'teamwon_mas/images/intro2nate.PNG' %}" height="600" width="565">
-            <img class="mySlides" src="{% static 'teamwon_mas/images/intro3nate.PNG' %}" height="600" width="565">
+            <img class="mySlides" src="{% static 'teamwon_mas/images/slideslideslide3.PNG' %}" height="600" width="565">
 
 
 </div>
@@ -80,8 +98,8 @@ The next step is to identify the process you want to follow.
           <p>Add tooltips to any element by adding the <code>data-toggle</code>, <code>data-placement</code>, and <code>title</code> attributes to the button. See: <a href="https://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltips</a></p>
         </div>-->
         <div class="modal-footer">
-          <button type="button" id = "right-click" class="btn btn-default" >Next</button>
-          <button type="button"  class="btn btn-primary" data-dismiss="modal">OK</button>
+          <button type="button" id = "right-click" class="btn btn-primary" >Next</button>
+          <button type="button"  class="btn btn-default" data-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
